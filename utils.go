@@ -40,3 +40,16 @@ func insertNode(node *Node, key int, value string) {
 		node.value = value
 	}
 }
+func search(rn *Node, key int) string {
+	node := rn
+	for node != nil {
+		if key == node.key {
+			return node.value
+		} else if key < node.key {
+			node = node.left
+		} else {
+			node = node.right
+		}
+	}
+	return ""
+}

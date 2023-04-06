@@ -41,15 +41,24 @@ func promptOptions(rn *Node) {
 			promptOptions(rn)
 		} else {
 			value, _ := getInput("Enter a value for this key: ", reader)
-
 			insertNode(rn, keyInt, value)
 			fmt.Printf("Value inserted with key is '%v' and its value is '%v' \n", keyInt, value)
-
 			promptOptions(rn)
 		}
 
 	case "s":
-
+		key, _ := getInput("Enter key for searching: ", reader)
+		keyInt, keyErr := strconv.Atoi(key)
+		if keyErr != nil {
+			fmt.Println("The key must be a number...")
+			promptOptions(rn)
+		} else {
+			value := search(rn, keyInt)
+			fmt.Println("-------------------------------")
+			fmt.Printf("Value for the key '%v' is : %v \n", keyInt, value)
+			fmt.Println("-------------------------------")
+			promptOptions(rn)
+		}
 	case "d":
 
 	default:
