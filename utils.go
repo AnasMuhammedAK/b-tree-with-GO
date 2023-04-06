@@ -17,6 +17,35 @@ type Tree struct {
 	root *Node
 }
 
+// InOrder print node of tree
+func InOrder(root *Node) {
+	if root == nil {
+		return
+	}
+	InOrder(root.left)
+	fmt.Printf("%d ", root.key)
+	InOrder(root.right)
+}
+
+// PreOrder print node of tree
+func PreOrder(root *Node) {
+	if nil == root {
+		return
+	}
+	PreOrder(root.left)
+	PreOrder(root.right)
+	fmt.Printf("%d ", root.key)
+}
+
+// PostOrder print node of tree
+func PostOrder(root *Node) {
+	if nil == root {
+		return
+	}
+	fmt.Printf("%d ", root.key)
+	PostOrder(root.left)
+	PostOrder(root.right)
+}
 func getInput(prompt string, r *bufio.Reader) (string, error) {
 	fmt.Print(prompt)
 	input, err := r.ReadString('\n')
@@ -66,14 +95,11 @@ func deleteNode(root *Node, key int) *Node {
 		// case 1: leaf node
 		if root.left == nil && root.right == nil {
 			root = nil
-			return root
 		} else if root.left == nil {
 			// case 2: one child
 			root = root.right
-			return root
 		} else if root.right == nil {
 			root = root.left
-			return root
 		} else {
 			// case 3: two children
 			successor := minkeyNode(root.right)

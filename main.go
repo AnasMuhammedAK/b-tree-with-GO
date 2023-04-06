@@ -30,7 +30,7 @@ func (t *Tree) createTree() {
 func promptOptions(rn *Node) {
 	reader := bufio.NewReader(os.Stdin)
 
-	opt, _ := getInput("Choose an option \n i - Insert a value to the tree \n s - Search a  value from the three \n d - Deleate a value from the tree \n e - Exit \n", reader)
+	opt, _ := getInput("Choose an option \n i - Insert a value to the tree \n s - Search a  value from the three \n d - Deleate a value from the tree \n p - Print tree \n e - Exit \n", reader)
 
 	switch opt {
 	case "i":
@@ -59,6 +59,22 @@ func promptOptions(rn *Node) {
 			fmt.Println("-------------------------------")
 			promptOptions(rn)
 		}
+	case "p":
+		fmt.Print("now tree become => \n")
+		optn, _ := getInput("Choose an option \n in - Print in inOrder \n pr - Print in preOrder \n ps - Print in postOrder \n", reader)
+
+		switch optn {
+		case "in":
+			InOrder(rn)
+			promptOptions(rn)
+		case "pr":
+			PreOrder(rn)
+			promptOptions(rn)
+		case "ps":
+			PostOrder(rn)
+			promptOptions(rn)
+		}
+
 	case "d":
 		key, _ := getInput("Enter key for deleting value: ", reader)
 		keyInt, keyErr := strconv.Atoi(key)
@@ -68,8 +84,9 @@ func promptOptions(rn *Node) {
 		} else {
 			deleteNode(rn, keyInt)
 			fmt.Println("-------------------------------")
-			fmt.Println("Deleted Succesfully...")
-			fmt.Println("-------------------------------")
+			fmt.Println("Deleted Succesfully and tree become =>")
+			InOrder(rn)
+			fmt.Println("\n-------------------------------")
 			promptOptions(rn)
 		}
 	default:
