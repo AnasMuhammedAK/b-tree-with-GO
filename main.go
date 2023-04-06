@@ -89,6 +89,8 @@ func promptOptions(rn *Node) {
 			fmt.Println("\n-------------------------------")
 			promptOptions(rn)
 		}
+	case "e":
+		fmt.Println("Exited from the application")
 	default:
 		fmt.Println("That was not a valid option...")
 		promptOptions(rn)
