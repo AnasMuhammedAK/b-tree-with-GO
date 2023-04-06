@@ -51,5 +51,43 @@ func search(rn *Node, key int) string {
 			node = node.right
 		}
 	}
-	return ""
+	return "Data not found"
+}
+
+func deleteNode(root *Node, key int) *Node {
+	if root == nil {
+		return root
+	}
+	if key < root.key {
+		root.left = deleteNode(root.left, key)
+	} else if key > root.key {
+		root.right = deleteNode(root.right, key)
+	} else {
+		// case 1: leaf node
+		if root.left == nil && root.right == nil {
+			root = nil
+			return root
+		} else if root.left == nil {
+			// case 2: one child
+			root = root.right
+			return root
+		} else if root.right == nil {
+			root = root.left
+			return root
+		} else {
+			// case 3: two children
+			successor := minkeyNode(root.right)
+			root.key = successor.key
+			root.right = deleteNode(root.right, successor.key)
+		}
+	}
+	return root
+}
+
+func minkeyNode(root *Node) *Node {
+	current := root
+	for current.left != nil {
+		current = current.left
+	}
+	return current
 }

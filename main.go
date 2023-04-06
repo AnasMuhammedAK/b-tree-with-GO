@@ -60,7 +60,18 @@ func promptOptions(rn *Node) {
 			promptOptions(rn)
 		}
 	case "d":
-
+		key, _ := getInput("Enter key for deleting value: ", reader)
+		keyInt, keyErr := strconv.Atoi(key)
+		if keyErr != nil {
+			fmt.Println("The key must be a number...")
+			promptOptions(rn)
+		} else {
+			deleteNode(rn, keyInt)
+			fmt.Println("-------------------------------")
+			fmt.Println("Deleted Succesfully...")
+			fmt.Println("-------------------------------")
+			promptOptions(rn)
+		}
 	default:
 		fmt.Println("That was not a valid option...")
 		promptOptions(rn)
